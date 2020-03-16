@@ -2,7 +2,7 @@
     "name": "eleizotova/php-project-lvl1",
     "bin": [
       "bin/brain-games"
-    ]
+    ],
     "description": "first project php",
     "authors": [
         {
