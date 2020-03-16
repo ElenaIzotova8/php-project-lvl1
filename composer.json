@@ -4,6 +4,7 @@
       "bin/brain-games"
     ],
     "description": "first project php",
+    "license": "MIT",
     "authors": [
         {
             "name": "Elena Izotova",
