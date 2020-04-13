@@ -1,0 +1,15 @@
+name: my_lint
+
+on:
+  push:
+    branches: [ master ]
+ 
+
+jobs:
+  my_lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Run linter
+        run: make lint
+        

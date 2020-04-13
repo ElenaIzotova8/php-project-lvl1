@@ -1,7 +1,7 @@
 {
     "name": "eleizotova/php-project-lvl1",
     "bin": [
-      "bin/brain-games"
+      "bin/brain-even"
     ],
     "description": "first project php",
     "license": "MIT",
