@@ -19,7 +19,7 @@ function question($quest, $correctAns)
     line("Question: %s", $quest);
     $answer = prompt('Your answer');
     if ($answer !== $correctAns) {
-        $wrong = "'" . $answer . "' is wrong answer ;(. Correct answer was '" . $correctAns . "'.....";
+        $wrong = "'" . $answer . "' is wrong answer ;(. Correct answer was '" . $correctAns . "'.";
         line($wrong);
         return false;
     } else {

@@ -1,0 +1,52 @@
+#!/usr/bin/env php
+<?php
+
+$autoloadPath1 = __DIR__ . '/../../../autoload.php';
+$autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
+if (file_exists($autoloadPath1)) {
+    require_once $autoloadPath1;
+} else {
+    require_once $autoloadPath2;
+}
+
+use function cli\line;
+use function BrainGames\Cli\welcome;
+use function BrainGames\Cli\question;
+
+$instr = 'What is the result of the expression?';
+$name = welcome($instr);
+
+for ($i = 1; $i < 4; $i++)
+    {
+        $number1 = rand(0, 100);
+        $number2 = rand(0, 100);
+        $oper = rand(1, 3);
+        
+        switch ($oper) {
+            case 1:
+                $operation = '+';
+                $correctAnswer = $number1 + $number2;
+                break;
+            case 2:
+                $operation = '-';
+                $correctAnswer = $number1 - $number2;
+                break;
+            case 3:
+                $operation = '*';
+                $correctAnswer = $number1 * $number2;
+                break;
+        }
+
+        $number = $number1 . $operation . $number2;
+        $correctAnswer = (string) $correctAnswer;
+    
+        $iscorrect = question($number, $correctAnswer);
+        if (!$iscorrect) {
+            line("Let's try again, %s!", $name);
+            break;
+        } else {
+            if ($i === 3) {
+                line("Congratulations, %s!", $name); 
+            }
+        }
+    }
