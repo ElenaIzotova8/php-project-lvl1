@@ -27,3 +27,12 @@ function question($quest, $correctAns)
         return true;
     }
 }
+
+function gcd($num1, $num2)
+{
+    if ($num1 === $num2) {
+        return $num1;
+    } else {
+        return gcd((min($num1, $num2)), abs($num1 - $num2));
+    }
+}
