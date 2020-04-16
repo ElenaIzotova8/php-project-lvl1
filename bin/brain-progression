@@ -1,0 +1,47 @@
+#!/usr/bin/env php
+<?php
+
+$autoloadPath1 = __DIR__ . '/../../../autoload.php';
+$autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
+if (file_exists($autoloadPath1)) {
+    require_once $autoloadPath1;
+} else {
+    require_once $autoloadPath2;
+}
+
+use function cli\line;
+use function BrainGames\Cli\welcome;
+use function BrainGames\Cli\question;
+
+$instr = 'What number is missing in the progression?';
+$name = welcome($instr);
+
+for ($i = 1; $i < 4; $i++)
+    {
+        $startProgression = rand(1, 10);
+        $stepOfProgression = rand(1, 10);
+        $placeInProgression = rand(1, 10);
+        $number = '';
+
+        for ($j = 1; $j <= 10; $j++)
+        {
+            if ($j === $placeInProgression) {
+                $number = $number . '..' . ' ';
+                $correctAnswer = $startProgression + $j * $stepOfProgression;
+            } else {
+                $number = $number . (string) ($startProgression + $j * $stepOfProgression) . ' ';
+            }
+        }
+
+        $correctAnswer = (string) $correctAnswer;
+    
+        $iscorrect = question($number, $correctAnswer);
+        if (!$iscorrect) {
+            line("Let's try again, %s!", $name);
+            break;
+        } else {
+            if ($i === 3) {
+                line("Congratulations, %s!", $name); 
+            }
+        }
+    }
