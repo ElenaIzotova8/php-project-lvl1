@@ -36,3 +36,18 @@ function gcd($num1, $num2)
         return gcd((min($num1, $num2)), abs($num1 - $num2));
     }
 }
+
+function isPrime($num)
+{
+    if ($num === 1) {
+        return true;
+    }
+    for ($i = 2; $i < $num / 2; $i++)
+    {
+        if ($num % $i === 0) {
+            return false;
+        break;
+        }
+    }
+    return true;
+}
