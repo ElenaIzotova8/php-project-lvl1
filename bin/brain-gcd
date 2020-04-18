@@ -11,27 +11,31 @@ if (file_exists($autoloadPath1)) {
 
 use function cli\line;
 use function BrainGames\Cli\welcome;
-use function BrainGames\Cli\question;
-use function BrainGames\Cli\gcd;
+use function BrainGames\Cli\ask;
+use function BrainGames\Cli\findGCD;
 
-$instr = 'Find the greatest common divisor of given numbers.';
-$name = welcome($instr);
+$gameInstruction = 'Find the greatest common divisor of given numbers.';
+$name = welcome($gameInstruction);
 
-for ($i = 1; $i < 4; $i++)
+$roundsCount = 3;
+$lowerBound = 1;
+$upperBound = 100;
+
+for ($i = 1; $i <= $roundsCount; $i++)
     {
-        $number1 = rand(1, 100);
-        $number2 = rand(1, 100);
-        $number = $number1 . ' ' . $number2;
+        $number1 = rand($lowerBound, $upperBound);
+        $number2 = rand($lowerBound, $upperBound);
+        $expression = $number1 . ' ' . $number2;
 
 
-        $correctAnswer = (string) gcd($number1, $number2);
+        $correctAnswer = (string) findGCD($number1, $number2);
     
-        $iscorrect = question($number, $correctAnswer);
-        if (!$iscorrect) {
+        $isCorrect = ask($expression, $correctAnswer);
+        if (!$isCorrect) {
             line("Let's try again, %s!", $name);
             break;
         } else {
-            if ($i === 3) {
+            if ($i === $roundsCount) {
                 line("Congratulations, %s!", $name); 
             }
         }

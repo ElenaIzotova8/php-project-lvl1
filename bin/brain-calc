@@ -11,18 +11,22 @@ if (file_exists($autoloadPath1)) {
 
 use function cli\line;
 use function BrainGames\Cli\welcome;
-use function BrainGames\Cli\question;
+use function BrainGames\Cli\ask;
 
-$instr = 'What is the result of the expression?';
-$name = welcome($instr);
+$gameInstruction = 'What is the result of the expression?';
+$name = welcome($gameInstruction);
 
-for ($i = 1; $i < 4; $i++)
+$roundsCount = 3;
+$lowerBound = 1;
+$upperBound = 100;
+
+for ($i = 1; $i <= $roundsCount; $i++)
     {
-        $number1 = rand(0, 100);
-        $number2 = rand(0, 100);
-        $oper = rand(1, 3);
+        $number1 = rand($lowerBound, $upperBound);
+        $number2 = rand($lowerBound, $upperBound);
+        $operationNumber = rand(1, 3);
         
-        switch ($oper) {
+        switch ($operationNumber) {
             case 1:
                 $operation = '+';
                 $correctAnswer = $number1 + $number2;
@@ -37,15 +41,15 @@ for ($i = 1; $i < 4; $i++)
                 break;
         }
 
-        $number = $number1 . $operation . $number2;
+        $expression = $number1 . $operation . $number2;
         $correctAnswer = (string) $correctAnswer;
     
-        $iscorrect = question($number, $correctAnswer);
-        if (!$iscorrect) {
+        $isCorrect = ask($expression, $correctAnswer);
+        if (!$isCorrect) {
             line("Let's try again, %s!", $name);
             break;
         } else {
-            if ($i === 3) {
+            if ($i === $roundsCount) {
                 line("Congratulations, %s!", $name); 
             }
         }

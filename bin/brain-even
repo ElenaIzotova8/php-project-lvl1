@@ -11,21 +11,25 @@ if (file_exists($autoloadPath1)) {
 
 use function cli\line;
 use function BrainGames\Cli\welcome;
-use function BrainGames\Cli\question;
+use function BrainGames\Cli\ask;
 
-$instr = 'Answer "yes" if the number is even, otherwise answer "no".';
-$name = welcome($instr);
+$gameInstruction = 'Answer "yes" if the number is even, otherwise answer "no".';
+$name = welcome($gameInstruction);
 
-for ($i = 1; $i < 4; $i++)
+$roundsCount = 3;
+$lowerBound = 1;
+$upperBound = 100;
+
+for ($i = 1; $i <= $roundsCount; $i++)
     {
-        $number = rand(0, 100);
+        $number = rand($lowerBound, $upperBound);
         $correctAnswer = $number % 2 === 0 ? 'yes' : 'no';
-        $iscorrect = question($number, $correctAnswer);
-        if (!$iscorrect) {
+        $isCorrect = ask($number, $correctAnswer);
+        if (!$isCorrect) {
             line("Let's try again, %s!", $name);
             break;
         } else {
-            if ($i === 3) {
+            if ($i === $roundsCount) {
                 line("Congratulations, %s!", $name); 
             }
         }

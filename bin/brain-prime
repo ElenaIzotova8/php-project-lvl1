@@ -11,23 +11,27 @@ if (file_exists($autoloadPath1)) {
 
 use function cli\line;
 use function BrainGames\Cli\welcome;
-use function BrainGames\Cli\question;
+use function BrainGames\Cli\ask;
 use function BrainGames\Cli\isPrime;
 
-$instr = 'Answer "yes" if given number is prime. Otherwise answer "no".';
-$name = welcome($instr);
+$gameInstruction = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+$name = welcome($gameInstruction);
 
-for ($i = 1; $i < 4; $i++)
+$roundsCount = 3;
+$lowerBound = 1;
+$upperBound = 100;
+
+for ($i = 1; $i <= $roundsCount; $i++)
     {
-        $number = rand(1, 100);
+        $number = rand($lowerBound, $upperBound);
         $correctAnswer = isPrime($number) ? 'yes' : 'no';
     
-        $iscorrect = question($number, $correctAnswer);
-        if (!$iscorrect) {
+        $isCorrect = ask($number, $correctAnswer);
+        if (!$isCorrect) {
             line("Let's try again, %s!", $name);
             break;
         } else {
-            if ($i === 3) {
+            if ($i === $roundsCount) {
                 line("Congratulations, %s!", $name); 
             }
         }

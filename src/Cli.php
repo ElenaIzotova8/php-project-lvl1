@@ -14,13 +14,12 @@ function welcome($instruction)
     return $name;
 }
 
-function question($quest, $correctAns)
+function ask($question, $correctAnswer)
 {
-    line("Question: %s", $quest);
+    line("Question: %s", $question);
     $answer = prompt('Your answer');
-    if ($answer !== $correctAns) {
-        $wrong = "'" . $answer . "' is wrong answer ;(. Correct answer was '" . $correctAns . "'.";
-        line($wrong);
+    if ($answer !== $correctAnswer) {
+        line("'" . $answer . "' is wrong answer ;(. Correct answer was '" . $correctAnswer . "'.");
         return false;
     } else {
         line('Correct!');
@@ -28,12 +27,12 @@ function question($quest, $correctAns)
     }
 }
 
-function gcd($num1, $num2)
+function findGCD($num1, $num2)
 {
     if ($num1 === $num2) {
         return $num1;
     } else {
-        return gcd((min($num1, $num2)), abs($num1 - $num2));
+        return findGCD((min($num1, $num2)), abs($num1 - $num2));
     }
 }
 
@@ -42,7 +41,7 @@ function isPrime($num)
     if ($num === 1) {
         return true;
     }
-    for ($i = 2; $i < ($num / 2); $i++) {
+    for ($i = 2; $i <= ($num / 2); $i++) {
         if ($num % $i === 0) {
             return false;
             break;

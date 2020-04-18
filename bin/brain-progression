@@ -11,36 +11,43 @@ if (file_exists($autoloadPath1)) {
 
 use function cli\line;
 use function BrainGames\Cli\welcome;
-use function BrainGames\Cli\question;
+use function BrainGames\Cli\ask;
 
-$instr = 'What number is missing in the progression?';
-$name = welcome($instr);
+$gameInstruction = 'What number is missing in the progression?';
+$name = welcome($gameInstruction);
 
-for ($i = 1; $i < 4; $i++)
+$roundsCount = 3;
+$lowerBoundStartProgression = 1;
+$upperBoundStartProgression = 10;
+$lowerBoundStepProgression = 1;
+$upperBoundStepProgression = 10;
+$lengthProgression = 10;
+
+for ($i = 1; $i <= $roundsCount; $i++)
     {
-        $startProgression = rand(1, 10);
-        $stepOfProgression = rand(1, 10);
-        $placeInProgression = rand(1, 10);
-        $number = '';
+        $startProgression = rand($lowerBoundStartProgression, $upperBoundStartProgression);
+        $stepProgression = rand($lowerBoundStepProgression, $upperBoundStepProgression);
+        $placeInProgression = rand(1, $lengthProgression);
+        $progression = '';
 
         for ($j = 1; $j <= 10; $j++)
         {
             if ($j === $placeInProgression) {
-                $number = $number . '..' . ' ';
-                $correctAnswer = $startProgression + $j * $stepOfProgression;
+                $progression = $progression . '..' . ' ';
+                $correctAnswer = $startProgression + $j * $stepProgression;
             } else {
-                $number = $number . (string) ($startProgression + $j * $stepOfProgression) . ' ';
+                $progression = $progression . (string) ($startProgression + $j * $stepProgression) . ' ';
             }
         }
 
         $correctAnswer = (string) $correctAnswer;
     
-        $iscorrect = question($number, $correctAnswer);
-        if (!$iscorrect) {
+        $isCorrect = ask($progression, $correctAnswer);
+        if (!$isCorrect) {
             line("Let's try again, %s!", $name);
             break;
         } else {
-            if ($i === 3) {
+            if ($i === $roundsCount) {
                 line("Congratulations, %s!", $name); 
             }
         }
