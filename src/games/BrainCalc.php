@@ -21,18 +21,18 @@ function runBrainCalc()
         $operationNumber = rand(1, 3);
         
         switch ($operationNumber) {
-        case 1:
-            $operation = '+';
-            $correctAnswer = $number1 + $number2;
-            break;
-        case 2:
-            $operation = '-';
-            $correctAnswer = $number1 - $number2;
-            break;
-        case 3:
-            $operation = '*';
-            $correctAnswer = $number1 * $number2;
-            break;
+            case 1:
+                $operation = '+';
+                $correctAnswer = $number1 + $number2;
+                break;
+            case 2:
+                $operation = '-';
+                $correctAnswer = $number1 - $number2;
+                break;
+            case 3:
+                $operation = '*';
+                $correctAnswer = $number1 * $number2;
+                break;
         }
 
         $expression = $number1 . $operation . $number2;
@@ -44,7 +44,7 @@ function runBrainCalc()
             break;
         } else {
             if ($i === $roundsCount) {
-                line("Congratulations, %s!", $name); 
+                line("Congratulations, %s!", $name);
             }
         }
     }

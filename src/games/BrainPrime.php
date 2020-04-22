@@ -38,7 +38,7 @@ function runBrainPrime()
             break;
         } else {
             if ($i === $roundsCount) {
-                line("Congratulations, %s!", $name); 
+                line("Congratulations, %s!", $name);
             }
         }
     }
