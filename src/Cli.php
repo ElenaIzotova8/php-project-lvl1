@@ -26,26 +26,3 @@ function ask($question, $correctAnswer)
         return true;
     }
 }
-
-function findGCD($num1, $num2)
-{
-    if ($num1 === $num2) {
-        return $num1;
-    } else {
-        return findGCD((min($num1, $num2)), abs($num1 - $num2));
-    }
-}
-
-function isPrime($num)
-{
-    if ($num === 1) {
-        return true;
-    }
-    for ($i = 2; $i <= ($num / 2); $i++) {
-        if ($num % $i === 0) {
-            return false;
-            break;
-        }
-    }
-    return true;
-}
