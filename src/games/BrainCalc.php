@@ -2,50 +2,66 @@
 
 namespace BrainGames\BrainCalc;
 
-use function cli\line;
 use function BrainGames\Cli\welcome;
-use function BrainGames\Cli\ask;
+use function BrainGames\Cli\getName;
+use function BrainGames\Cli\playRound;
+
+function addition($number1, $number2)
+{
+    return $number1 + $number2;
+}
+
+function subtraction($number1, $number2)
+{
+    return $number1 - $number2;
+}
+
+function multiplication($number1, $number2)
+{
+    return $number1 * $number2;
+}
+
+function prepareQuestion()
+{
+    $lowerBound = 1;
+    $upperBound = 100;
+    $operations = ['+', '-', '*'];
+
+    $number1 = rand($lowerBound, $upperBound);
+    $number2 = rand($lowerBound, $upperBound);
+    $operationNumber = rand(0, count($operations) - 1);
+    $operation = $operations[$operationNumber];
+    $question = $number1 . ' ' . $operation . ' ' . $number2;
+    return $question;
+}
+
+function prepareCorrectAnswer($question)
+{
+    $expression = explode(' ', $question);
+    [$number1, $operation, $number2] = $expression;
+    if ($operation === '+') {
+        $correctAnswer = addition($number1, $number2);
+    }
+    if ($operation === '-') {
+        $correctAnswer = subtraction($number1, $number2);
+    }
+    if ($operation === '*') {
+        $correctAnswer = multiplication($number1, $number2);
+    }
+    return (string) $correctAnswer;
+}
 
 function runBrainCalc()
 {
     $gameInstruction = 'What is the result of the expression?';
-    $name = welcome($gameInstruction);
-
-    $roundsCount = 3;
-    $lowerBound = 1;
-    $upperBound = 100;
-
-    for ($i = 1; $i <= $roundsCount; $i++) {
-        $number1 = rand($lowerBound, $upperBound);
-        $number2 = rand($lowerBound, $upperBound);
-        $operationNumber = rand(1, 3);
-        
-        switch ($operationNumber) {
-            case 1:
-                $operation = '+';
-                $correctAnswer = $number1 + $number2;
-                break;
-            case 2:
-                $operation = '-';
-                $correctAnswer = $number1 - $number2;
-                break;
-            case 3:
-                $operation = '*';
-                $correctAnswer = $number1 * $number2;
-                break;
-        }
-
-        $expression = $number1 . $operation . $number2;
-        $correctAnswer = (string) $correctAnswer;
-    
-        $isCorrect = ask($expression, $correctAnswer);
-        if (!$isCorrect) {
-            line("Let's try again, %s!", $name);
-            break;
-        } else {
-            if ($i === $roundsCount) {
-                line("Congratulations, %s!", $name);
-            }
-        }
+    welcome($gameInstruction);
+    $name = getName();
+    $roundNumber = 1;
+    $nextRoundNumber = 2;
+    while ($roundNumber === $nextRoundNumber - 1) {
+        $question = prepareQuestion();
+        $correctAnswer = prepareCorrectAnswer($question);
+        $roundNumber = playRound($roundNumber, $question, $correctAnswer, $name);
+        $nextRoundNumber += 1;
     }
 }

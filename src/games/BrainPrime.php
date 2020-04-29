@@ -2,9 +2,9 @@
 
 namespace BrainGames\BrainPrime;
 
-use function cli\line;
 use function BrainGames\Cli\welcome;
-use function BrainGames\Cli\ask;
+use function BrainGames\Cli\getName;
+use function BrainGames\Cli\playRound;
 
 function isPrime($num)
 {
@@ -19,27 +19,31 @@ function isPrime($num)
     return true;
 }
 
+function prepareQuestion()
+{
+    $lowerBound = 1;
+    $upperBound = 100;
+    $question = rand($lowerBound, $upperBound);
+    return $question;
+}
+
+function prepareCorrectAnswer($question)
+{
+    $correctAnswer = isPrime($question) ? 'yes' : 'no';
+    return $correctAnswer;
+}
+
 function runBrainPrime()
 {
     $gameInstruction = 'Answer "yes" if given number is prime. Otherwise answer "no".';
-    $name = welcome($gameInstruction);
-
-    $roundsCount = 3;
-    $lowerBound = 1;
-    $upperBound = 100;
-
-    for ($i = 1; $i <= $roundsCount; $i++) {
-        $number = rand($lowerBound, $upperBound);
-        $correctAnswer = isPrime($number) ? 'yes' : 'no';
-    
-        $isCorrect = ask($number, $correctAnswer);
-        if (!$isCorrect) {
-            line("Let's try again, %s!", $name);
-            break;
-        } else {
-            if ($i === $roundsCount) {
-                line("Congratulations, %s!", $name);
-            }
-        }
+    welcome($gameInstruction);
+    $name = getName();
+    $roundNumber = 1;
+    $nextRoundNumber = 2;
+    while ($roundNumber === $nextRoundNumber - 1) {
+        $question = prepareQuestion();
+        $correctAnswer = prepareCorrectAnswer($question);
+        $roundNumber = playRound($roundNumber, $question, $correctAnswer, $name);
+        $nextRoundNumber += 1;
     }
 }
