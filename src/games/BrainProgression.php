@@ -32,8 +32,11 @@ function prepareQuestion()
 function prepareCorrectAnswer($question)
 {
     $progression = explode(' ', $question);
-    $startProgression = $progression[0] !== '..' ? $progression[0] : $progression[2] - ($progression[2] - $progression[1]) * 2;
-    $stepProgression = $progression[0] !== '..' && $progression[1] !== '..' ? $progression[1] - $progression[0] : $progression[3] - $progression[2];
+    $startProgression = $progression[0] !== '..' ? $progression[0] :
+        $progression[2] - ($progression[2] - $progression[1]) * 2;
+    $stepProgression = $progression[0] !== '..' && $progression[1] !== '..' ?
+        $progression[1] - $progression[0] :
+        $progression[3] - $progression[2];
     $placeInProgression = array_search('..', $progression);
     $correctAnswer = $startProgression + $placeInProgression * $stepProgression;
     return (string) $correctAnswer;
