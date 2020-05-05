@@ -3,6 +3,7 @@
 namespace BrainGames\BrainProgression;
 
 use function BrainGames\Cli\runGame;
+
 use const BrainGames\Cli\ROUNDS_COUNT;
 
 function prepareQuestionAndCorrectAnswer()
@@ -26,7 +27,7 @@ function prepareQuestionAndCorrectAnswer()
         } else {
             $progression = $progression . (string) ($startProgression + $j * $stepProgression) . ' ';
         }
-    } 
+    }
     $data[] = $progression;
     $data[] = $correctAnswer;
     return $data;
@@ -37,7 +38,7 @@ function runBrainProgression()
     $gameInstruction = 'What number is missing in the progression?';
     $data = [];
     for ($i = 1; $i <= ROUNDS_COUNT; $i++) {
-        $data[$i-1] = prepareQuestionAndCorrectAnswer();
+        $data[$i - 1] = prepareQuestionAndCorrectAnswer();
     }
     runGame($gameInstruction, $data);
 }

@@ -3,6 +3,7 @@
 namespace BrainGames\BrainPrime;
 
 use function BrainGames\Cli\runGame;
+
 use const BrainGames\Cli\ROUNDS_COUNT;
 
 function isPrime($num)
@@ -33,8 +34,8 @@ function runBrainPrime()
     for ($i = 1; $i <= ROUNDS_COUNT; $i++) {
         $question = prepareQuestion();
         $correctAnswer = isPrime($question) ? 'yes' : 'no';
-        $data[$i-1][0] = $question;
-        $data[$i-1][1] = $correctAnswer;
+        $data[$i - 1][0] = $question;
+        $data[$i - 1][1] = $correctAnswer;
     }
     runGame($gameInstruction, $data);
 }

@@ -3,6 +3,7 @@
 namespace BrainGames\BrainGcd;
 
 use function BrainGames\Cli\runGame;
+
 use const BrainGames\Cli\ROUNDS_COUNT;
 
 function findGCD($num1, $num2)
@@ -25,8 +26,8 @@ function runBrainGcd()
         $number2 = rand($lowerBound, $upperBound);
         $question = $number1 . ' ' . $number2;
         $correctAnswer = (string) findGCD($number1, $number2);
-        $data[$i-1][0] = $question;
-        $data[$i-1][1] = $correctAnswer;
+        $data[$i - 1][0] = $question;
+        $data[$i - 1][1] = $correctAnswer;
     }
     runGame($gameInstruction, $data);
 }

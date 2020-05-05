@@ -15,8 +15,8 @@ function runGame($instruction, $data)
     line("Hello, %s!", $name);
 
     for ($i = 1; $i <= ROUNDS_COUNT; $i++) {
-        $question = $data[$i-1][0];
-        $correctAnswer = $data[$i-1][1];
+        $question = $data[$i - 1][0];
+        $correctAnswer = $data[$i - 1][1];
 
         line("Question: %s", $question);
         $answer = prompt('Your answer');

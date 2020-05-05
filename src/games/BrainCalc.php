@@ -3,6 +3,7 @@
 namespace BrainGames\BrainCalc;
 
 use function BrainGames\Cli\runGame;
+
 use const BrainGames\Cli\ROUNDS_COUNT;
 
 function prepareQuestionAndCorrectAnswer()
@@ -18,15 +19,12 @@ function prepareQuestionAndCorrectAnswer()
     $operation = $operations[$operationNumber];
     $question = $number1 . ' ' . $operation . ' ' . $number2;
     switch ($operation) {
-    case '+':
-        $correctAnswer = $number1 + $number2;
-        break;
-    case '-':
-        $correctAnswer = $number1 - $number2;
-        break;
-    case '*':
-        $correctAnswer = $number1 * $number2;
-        break;
+        case '+':
+            $correctAnswer = $number1 + $number2; break;
+        case '-':
+            $correctAnswer = $number1 - $number2; break;
+        case '*':
+            $correctAnswer = $number1 * $number2; break;
     }
     $data[] = $question;
     $data[] = (string) $correctAnswer;
@@ -38,7 +36,7 @@ function runBrainCalc()
     $gameInstruction = 'What is the result of the expression?';
     $data = [];
     for ($i = 1; $i <= ROUNDS_COUNT; $i++) {
-        $data[$i-1] = prepareQuestionAndCorrectAnswer();
+        $data[$i - 1] = prepareQuestionAndCorrectAnswer();
     }
     runGame($gameInstruction, $data);
 }

@@ -3,6 +3,7 @@
 namespace BrainGames\BrainEven;
 
 use function BrainGames\Cli\runGame;
+
 use const BrainGames\Cli\ROUNDS_COUNT;
 
 function isEven($number)
@@ -25,8 +26,8 @@ function runBrainEven()
     for ($i = 1; $i <= ROUNDS_COUNT; $i++) {
         $question = prepareQuestion();
         $correctAnswer = isEven($question) ? 'yes' : 'no';
-        $data[$i-1][0] = $question;
-        $data[$i-1][1] = $correctAnswer;
+        $data[$i - 1][0] = $question;
+        $data[$i - 1][1] = $correctAnswer;
     }
     runGame($gameInstruction, $data);
 }
