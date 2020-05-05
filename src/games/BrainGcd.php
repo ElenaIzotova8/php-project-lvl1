@@ -2,9 +2,8 @@
 
 namespace BrainGames\BrainGcd;
 
-use function BrainGames\Cli\welcome;
-use function BrainGames\Cli\getName;
-use function BrainGames\Cli\playRound;
+use function BrainGames\Cli\runGame;
+use const BrainGames\Cli\ROUNDS_COUNT;
 
 function findGCD($num1, $num2)
 {
@@ -15,34 +14,19 @@ function findGCD($num1, $num2)
     }
 }
 
-function prepareQuestion()
-{
-    $lowerBound = 1;
-    $upperBound = 100;
-    $number1 = rand($lowerBound, $upperBound);
-    $number2 = rand($lowerBound, $upperBound);
-    $question = $number1 . ' ' . $number2;
-    return $question;
-}
-
-function prepareCorrectAnswer($question)
-{
-    [$number1, $number2] = explode(' ', $question);
-    $correctAnswer = (string) findGCD($number1, $number2);
-    return $correctAnswer;
-}
-
 function runBrainGcd()
 {
     $gameInstruction = 'Find the greatest common divisor of given numbers.';
-    welcome($gameInstruction);
-    $name = getName();
-    $roundNumber = 1;
-    $nextRoundNumber = 2;
-    while ($roundNumber === $nextRoundNumber - 1) {
-        $question = prepareQuestion();
-        $correctAnswer = prepareCorrectAnswer($question);
-        $roundNumber = playRound($roundNumber, $question, $correctAnswer, $name);
-        $nextRoundNumber += 1;
+    $data = [];
+    for ($i = 1; $i <= ROUNDS_COUNT; $i++) {
+        $lowerBound = 1;
+        $upperBound = 100;
+        $number1 = rand($lowerBound, $upperBound);
+        $number2 = rand($lowerBound, $upperBound);
+        $question = $number1 . ' ' . $number2;
+        $correctAnswer = (string) findGCD($number1, $number2);
+        $data[$i-1][0] = $question;
+        $data[$i-1][1] = $correctAnswer;
     }
+    runGame($gameInstruction, $data);
 }

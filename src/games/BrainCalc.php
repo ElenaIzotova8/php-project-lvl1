@@ -2,66 +2,43 @@
 
 namespace BrainGames\BrainCalc;
 
-use function BrainGames\Cli\welcome;
-use function BrainGames\Cli\getName;
-use function BrainGames\Cli\playRound;
+use function BrainGames\Cli\runGame;
+use const BrainGames\Cli\ROUNDS_COUNT;
 
-function addition($number1, $number2)
-{
-    return $number1 + $number2;
-}
-
-function subtraction($number1, $number2)
-{
-    return $number1 - $number2;
-}
-
-function multiplication($number1, $number2)
-{
-    return $number1 * $number2;
-}
-
-function prepareQuestion()
+function prepareQuestionAndCorrectAnswer()
 {
     $lowerBound = 1;
     $upperBound = 100;
     $operations = ['+', '-', '*'];
+    $data = [];
 
     $number1 = rand($lowerBound, $upperBound);
     $number2 = rand($lowerBound, $upperBound);
     $operationNumber = rand(0, count($operations) - 1);
     $operation = $operations[$operationNumber];
     $question = $number1 . ' ' . $operation . ' ' . $number2;
-    return $question;
-}
-
-function prepareCorrectAnswer($question)
-{
-    $expression = explode(' ', $question);
-    [$number1, $operation, $number2] = $expression;
-    if ($operation === '+') {
-        $correctAnswer = addition($number1, $number2);
+    switch ($operation) {
+    case '+':
+        $correctAnswer = $number1 + $number2;
+        break;
+    case '-':
+        $correctAnswer = $number1 - $number2;
+        break;
+    case '*':
+        $correctAnswer = $number1 * $number2;
+        break;
     }
-    if ($operation === '-') {
-        $correctAnswer = subtraction($number1, $number2);
-    }
-    if ($operation === '*') {
-        $correctAnswer = multiplication($number1, $number2);
-    }
-    return (string) $correctAnswer;
+    $data[] = $question;
+    $data[] = (string) $correctAnswer;
+    return $data;
 }
 
 function runBrainCalc()
 {
     $gameInstruction = 'What is the result of the expression?';
-    welcome($gameInstruction);
-    $name = getName();
-    $roundNumber = 1;
-    $nextRoundNumber = 2;
-    while ($roundNumber === $nextRoundNumber - 1) {
-        $question = prepareQuestion();
-        $correctAnswer = prepareCorrectAnswer($question);
-        $roundNumber = playRound($roundNumber, $question, $correctAnswer, $name);
-        $nextRoundNumber += 1;
+    $data = [];
+    for ($i = 1; $i <= ROUNDS_COUNT; $i++) {
+        $data[$i-1] = prepareQuestionAndCorrectAnswer();
     }
+    runGame($gameInstruction, $data);
 }

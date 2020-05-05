@@ -5,61 +5,30 @@ namespace BrainGames\Cli;
 use function cli\line;
 use function cli\prompt;
 
-function welcome($instruction)
+const ROUNDS_COUNT = 3;
+
+function runGame($instruction, $data)
 {
     line('Welcome to the Brain Games!');
     line($instruction);
-}
-
-function getName()
-{
     $name = prompt('May I have your name?');
     line("Hello, %s!", $name);
-    return $name;
-}
 
-function ask($question)
-{
-    line("Question: %s", $question);
-    $answer = prompt('Your answer');
-    return $answer;
-}
+    for ($i = 1; $i <= ROUNDS_COUNT; $i++) {
+        $question = $data[$i-1][0];
+        $correctAnswer = $data[$i-1][1];
 
-function isCorrectAnswer($answer, $correctAnswer)
-{
-    return $answer === $correctAnswer;
-}
+        line("Question: %s", $question);
+        $answer = prompt('Your answer');
 
-function reportError($answer, $correctAnswer, $name)
-{
-    line("'" . $answer . "' is wrong answer ;(. Correct answer was '" . $correctAnswer . "'.");
-    line("Let's try again, %s!", $name);
-}
-
-function reportCorrectAnswer()
-{
-    line('Correct!');
-}
-
-function reportWin($name)
-{
-    line("Congratulations, %s!", $name);
-}
-
-function playRound($roundNumber, $question, $correctAnswer, $name)
-{
-    $roundsCount = 3;
-    $answer = ask($question);
-    if (!isCorrectAnswer($answer, $correctAnswer)) {
-        reportError($answer, $correctAnswer, $name);
-        return $roundNumber;
+        if ($answer !== $correctAnswer) {
+            line("'" . $answer . "' is wrong answer ;(. Correct answer was '" . $correctAnswer . "'.");
+            line("Let's try again, %s!", $name);
+            break;
+        }
+        line('Correct!');
+        if ($i === ROUNDS_COUNT) {
+            line("Congratulations, %s!", $name);
+        }
     }
-    if (isCorrectAnswer($answer, $correctAnswer) && $roundNumber < $roundsCount) {
-        reportCorrectAnswer();
-        $roundNumber += 1;
-        return $roundNumber;
-    }
-    reportCorrectAnswer();
-    reportWin($name);
-    return $roundNumber;
 }

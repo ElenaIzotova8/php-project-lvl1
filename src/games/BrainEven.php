@@ -2,9 +2,8 @@
 
 namespace BrainGames\BrainEven;
 
-use function BrainGames\Cli\welcome;
-use function BrainGames\Cli\getName;
-use function BrainGames\Cli\playRound;
+use function BrainGames\Cli\runGame;
+use const BrainGames\Cli\ROUNDS_COUNT;
 
 function isEven($number)
 {
@@ -19,23 +18,15 @@ function prepareQuestion()
     return $question;
 }
 
-function prepareCorrectAnswer($question)
-{
-    $correctAnswer = isEven($question) ? 'yes' : 'no';
-    return $correctAnswer;
-}
-
 function runBrainEven()
 {
     $gameInstruction = 'Answer "yes" if the number is even, otherwise answer "no".';
-    welcome($gameInstruction);
-    $name = getName();
-    $roundNumber = 1;
-    $nextRoundNumber = 2;
-    while ($roundNumber === $nextRoundNumber - 1) {
+    $data = [];
+    for ($i = 1; $i <= ROUNDS_COUNT; $i++) {
         $question = prepareQuestion();
-        $correctAnswer = prepareCorrectAnswer($question);
-        $roundNumber = playRound($roundNumber, $question, $correctAnswer, $name);
-        $nextRoundNumber += 1;
+        $correctAnswer = isEven($question) ? 'yes' : 'no';
+        $data[$i-1][0] = $question;
+        $data[$i-1][1] = $correctAnswer;
     }
+    runGame($gameInstruction, $data);
 }
