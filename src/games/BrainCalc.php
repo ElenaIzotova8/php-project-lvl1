@@ -19,12 +19,15 @@ function prepareQuestionAndCorrectAnswer()
     $operation = $operations[$operationNumber];
     $question = $number1 . ' ' . $operation . ' ' . $number2;
     switch ($operation) {
-        case '+':
-            $correctAnswer = $number1 + $number2; break;
-        case '-':
-            $correctAnswer = $number1 - $number2; break;
-        case '*':
-            $correctAnswer = $number1 * $number2; break;
+        case "+":
+            $correctAnswer = $number1 + $number2;
+            break;
+        case "-":
+            $correctAnswer = $number1 - $number2;
+            break;
+        case "*":
+            $correctAnswer = $number1 * $number2;
+            break;
     }
     $data[] = $question;
     $data[] = (string) $correctAnswer;
