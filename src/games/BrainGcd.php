@@ -19,15 +19,15 @@ function runBrainGcd()
 {
     $gameInstruction = 'Find the greatest common divisor of given numbers.';
     $data = [];
-    for ($i = 1; $i <= ROUNDS_COUNT; $i++) {
+    for ($i = 0; $i < ROUNDS_COUNT; $i++) {
         $lowerBound = 1;
         $upperBound = 100;
         $number1 = rand($lowerBound, $upperBound);
         $number2 = rand($lowerBound, $upperBound);
         $question = $number1 . ' ' . $number2;
         $correctAnswer = (string) findGCD($number1, $number2);
-        $data[$i - 1][0] = $question;
-        $data[$i - 1][1] = $correctAnswer;
+        $data[$i][0] = $question;
+        $data[$i][1] = $correctAnswer;
     }
     runGame($gameInstruction, $data);
 }

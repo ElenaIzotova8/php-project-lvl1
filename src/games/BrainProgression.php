@@ -17,18 +17,19 @@ function prepareQuestionAndCorrectAnswer()
     $startProgression = rand($lowerBoundStartProgression, $upperBoundStartProgression);
     $stepProgression = rand($lowerBoundStepProgression, $upperBoundStepProgression);
     $placeInProgression = rand(1, $lengthProgression);
-    $progression = '';
+    $progression = [];
     $data = [];
 
     for ($j = 1; $j <= $lengthProgression; $j++) {
         if ($j === $placeInProgression) {
-            $progression = $progression . '..' . ' ';
+            $progression[] = '..';
             $correctAnswer = (string) ($startProgression + $j * $stepProgression);
         } else {
-            $progression = $progression . (string) ($startProgression + $j * $stepProgression) . ' ';
+            $progression[] = $startProgression + $j * $stepProgression;
         }
     }
-    $data[] = $progression;
+    $question = implode(' ', $progression);
+    $data[] = $question;
     $data[] = $correctAnswer;
     return $data;
 }
@@ -37,8 +38,8 @@ function runBrainProgression()
 {
     $gameInstruction = 'What number is missing in the progression?';
     $data = [];
-    for ($i = 1; $i <= ROUNDS_COUNT; $i++) {
-        $data[$i - 1] = prepareQuestionAndCorrectAnswer();
+    for ($i = 0; $i < ROUNDS_COUNT; $i++) {
+        $data[$i] = prepareQuestionAndCorrectAnswer();
     }
     runGame($gameInstruction, $data);
 }
