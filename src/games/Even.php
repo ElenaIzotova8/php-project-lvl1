@@ -13,9 +13,8 @@ function isEven($number)
 
 function runBrainEven()
 {
-    $gameInstruction = 'Answer "yes" if the number is even, otherwise answer "no".';
     $data = [];
-    
+    $gameInstruction = 'Answer "yes" if the number is even, otherwise answer "no".';
     for ($i = 0; $i < ROUNDS_COUNT; $i++) {
         $lowerBound = 1;
         $upperBound = 100;
