@@ -4,27 +4,32 @@
 
 Проект Игры разума - первый учебный проект на [Хекслете](https://hexlet.io) в рамках обучения по профессии [PHP-программист](https://ru.hexlet.io/professions/php).
 
-Загрузка проекта - composer require eleizotova/php-project-lvl1.
+Загрузка проекта - composer global require eleizotova/php-project-lvl1.
+[![asciicast](https://asciinema.org/a/330577.svg)](https://asciinema.org/a/330577)
 
-«Игры разума» — набор из пяти консольных игр, построенных по принципу популярных мобильных приложений для прокачки мозга. Каждая игра задает вопросы, на которые нужно дать правильные ответы. После трех правильных ответов считается, что игра пройдена. Неправильные ответы завершают игру и предлагают пройти ее заново. Игры:
+Посмотреть, в какую конкретно директорию composer складывает ссылки на исполняемые файлы, можно с помощью команды
+composer global config bin-dir.
+Путь к ней надо самостоятельно прописать в переменной окружения PATH. Для этого добавьте в файл .bashrc следующую строку:
 
-    Определение, является ли число четным.
-    Определение наибольшего общего делителя.
-    Определение, является ли число простым.
-    Калькулятор. Арифметические выражения, которые необходимо вычислить.
-    Прогрессия. Поиск пропущенных чисел в последовательности чисел.
+export PATH=$PATH:/path/to/directory
 
-Запуск игры Определение, является ли число четным (brain-even) - php php-project-lvl1/bin/brain-even:
-[![asciicast](https://asciinema.org/a/326996.svg)](https://asciinema.org/a/326996)
+Где /path/to/directory путь до директории с исполняемыми файлами. После нужно перезапустить терминал.
 
-Запуск игры Определение наибольшего общего делителя (brain-gcd) - php php-project-lvl1/bin/brain-gcd:
-[![asciicast](https://asciinema.org/a/326997.svg)](https://asciinema.org/a/326997)
+«Игры разума» — набор из пяти консольных игр, построенных по принципу популярных мобильных приложений для прокачки мозга. Каждая игра задает вопросы, на которые нужно дать правильные ответы. После трех правильных ответов считается, что игра пройдена. Неправильные ответы завершают игру и предлагают пройти ее заново. 
 
-Запуск игры Определение, является ли число простым (brain-prime) - php php-project-lvl1/bin/brain-prime:
-[![asciicast](https://asciinema.org/a/326999.svg)](https://asciinema.org/a/326999)
+Игры:
 
-Запуск игры Калькулятор (brain-calc) - php php-project-lvl1/bin/brain-calc:
-[![asciicast](https://asciinema.org/a/lnPr1q4hYTOh4a3w7QBX5mxFy.svg)](https://asciinema.org/a/lnPr1q4hYTOh4a3w7QBX5mxFy)
+Запуск игры Определение, является ли число четным (brain-even) - brain-even:
+[![asciicast](https://asciinema.org/a/330579.svg)](https://asciinema.org/a/330579)
 
-Запуск игры Прогрессия (brain-progression) - php php-project-lvl1/bin/brain-progression:
-[![asciicast](https://asciinema.org/a/326998.svg)](https://asciinema.org/a/326998)
+Запуск игры Определение наибольшего общего делителя (brain-gcd) - brain-gcd:
+[![asciicast](https://asciinema.org/a/330580.svg)](https://asciinema.org/a/330580)
+
+Запуск игры Определение, является ли число простым (brain-prime) - brain-prime:
+[![asciicast](https://asciinema.org/a/330581.svg)](https://asciinema.org/a/330581)
+
+Запуск игры Калькулятор (brain-calc) - brain-calc:
+[![asciicast](https://asciinema.org/a/330584.svg)](https://asciinema.org/a/330584)
+
+Запуск игры Прогрессия (brain-progression) - brain-progression:
+[![asciicast](https://asciinema.org/a/330585.svg)](https://asciinema.org/a/330585)
